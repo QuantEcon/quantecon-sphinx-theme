@@ -3,25 +3,25 @@
 // ============================================================================
 
 [data-theme="dark"] {
-  // ── Core colours ──────────────────────────────────────────────────────
-  --st-color-primary: #60a5fa;
-  --st-color-primary-light: rgba(96, 165, 250, 0.15);
-  --st-color-secondary: #94a3b8;
-  --st-color-accent: #22d3ee;
-  --st-color-bg: #0f172a;
-  --st-color-surface: #1e293b;
-  --st-color-surface-raised: #334155;
-  --st-color-border: #334155;
-  --st-color-border-strong: #475569;
-  --st-color-text: #e2e8f0;
-  --st-color-text-muted: #94a3b8;
-  --st-color-text-faint: #64748b;
-  --st-color-link: #60a5fa;
-  --st-color-link-hover: #93bbfd;
-  --st-color-code-bg: #1e293b;
-  --st-color-code-text: #e2e8f0;
-  --st-color-em: #2dd4bf;
-  --st-color-strong: #fbbf24;
+  // ── Core colours (Zinc palette) ───────────────────────────────────────
+  --st-color-primary: #818cf8;
+  --st-color-primary-light: rgba(129, 140, 248, 0.15);
+  --st-color-secondary: #a1a1aa;
+  --st-color-accent: #a78bfa;
+  --st-color-bg: #18181b;
+  --st-color-surface: #27272a;
+  --st-color-surface-raised: #3f3f46;
+  --st-color-border: #3f3f46;
+  --st-color-border-strong: #52525b;
+  --st-color-text: #e4e4e7;
+  --st-color-text-muted: #a1a1aa;
+  --st-color-text-faint: #71717a;
+  --st-color-link: #818cf8;
+  --st-color-link-hover: #a5b4fc;
+  --st-color-code-bg: #27272a;
+  --st-color-code-text: #e4e4e7;
+  --st-color-em: #34d399;
+  --st-color-strong: #fb7185;
 
   // ── Shadows ─────────────────────────────────────────────────────────
   --st-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
@@ -30,13 +30,13 @@
 
   // ── Selection ───────────────────────────────────────────────────────
   ::selection {
-    background-color: rgba(96, 165, 250, 0.3);
-    color: #e2e8f0;
+    background-color: rgba(129, 140, 248, 0.3);
+    color: #e4e4e7;
   }
 
   // ── Top bar ─────────────────────────────────────────────────────────
   .st-topbar {
-    background-color: rgba(15, 23, 42, 0.9);
+    background-color: rgba(24, 24, 27, 0.9);
     border-bottom-color: var(--st-color-border);
   }
 
@@ -104,6 +104,6 @@
 // ── Dark mode colour scheme variants ──────────────────────────────────────
 
 [data-theme="dark"][data-color-scheme="academic"] {
-  --st-color-em: #93c5fd;
-  --st-color-strong: #fca5a5;
+  --st-color-em: #a5b4fc;
+  --st-color-strong: #fda4af;
 }

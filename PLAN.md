@@ -157,11 +157,11 @@ bar stealing vertical space.
 - Content max-width (e.g. 48rem) ensures readability regardless of remaining space
 - "Zen mode" button hides the panel entirely
 
-### 3.3 Layout C — Hybrid (Minimal Top Bar + RHS Panel)
+### 3.3 Layout C — Hybrid (Breadcrumb Nav Bar + RHS Panel) ✅ CHOSEN
 
 ```
 ┌─────────────────────────────────────────────────────┐
-│  [≡ Site Title]                        [☀/🌙] [🔍] │  ← minimal 40px bar
+│  🏠 › Part III  › Markov Chains        [☀/🌙] [🔍] │  ← 40px breadcrumb bar
 ├─────────────────────────────────────────┬───────────┤
 │                                         │           │
 │                                         │  RHS ToC  │
@@ -170,43 +170,75 @@ bar stealing vertical space.
 │                                         │           │
 │                                         │           │
 ├─────────────────────────────────────────┴───────────┤
-│  FOOTER                                             │
+│  FOOTER  · Theme by QuantEcon                       │
 └─────────────────────────────────────────────────────┘
 ```
 
-**Concept:** A thin top bar carries only the site title/logo and global
-controls (theme toggle, search). The LHS sidebar is replaced by a hamburger
-menu (slide-out overlay). The RHS panel houses the page ToC and optional
-controls.
+**Concept:** A thin top bar functions as a **breadcrumb navigation bar** that
+shows the reader's position within the book:
+
+```
+🏠 Home  ›  Part X  ›  Lecture Title
+```
+
+- **Home (icon)** — returns to the book's main index page
+- **Part X** — clickable; opens a dropdown/popover listing all parts, allowing
+  the reader to jump to another part of the book
+- **Lecture Title** — clickable; opens a dropdown listing all lectures within
+  the current part, allowing the reader to switch lectures
+
+This replaces both the traditional "Site Title" label and the hamburger menu.
+The breadcrumb **is** the site navigation — compact, contextual, and always
+visible. The RHS panel handles within-page navigation (ToC).
 
 **Pros:**
 - **Near-full vertical** and **near-full horizontal** space for content
-- Global nav is accessible but unobtrusive (hamburger)
+- **Contextual navigation** — the reader always knows where they are in the book
+- **Two clear navigation levels:** breadcrumb bar for site-level (between pages),
+  RHS ToC for page-level (within page)
+- No hamburger menu needed — navigation is inline and discoverable
 - RHS ToC stays visible for within-page navigation
-- The thin top bar is familiar enough to not confuse users
 - Clean, magazine-like feel
 
 **Cons:**
-- Hamburger menus can reduce discoverability of site navigation
-- Two interaction modes (hamburger overlay for nav, persistent panel for ToC)
+- Breadcrumb dropdowns need careful UX on mobile (may need to collapse to
+  a truncated form)
+- Requires Sphinx toctree metadata to build the breadcrumb trail
 
-### 3.4 Recommendation
+### 3.4 Decision: Layout C with Breadcrumb Navigation
 
-**Start with Layout C (Hybrid)** for the MVP:
+> **Status: CONFIRMED**
+
+**Layout C (Hybrid) with breadcrumb navigation bar** is the chosen direction:
 
 1. It preserves the best feature (collapsible RHS ToC with scroll-spy) in a
    prominent position.
-2. It eliminates the heavy LHS sidebar that dominates many Sphinx themes,
-   replacing it with a clean hamburger overlay — this is the modern pattern
-   used by documentation sites like Stripe, Tailwind, and Next.js.
-3. The thin top bar provides anchoring without stealing reading space.
+2. The breadcrumb bar replaces both the site title and the hamburger menu,
+   providing **always-visible, contextual navigation** without the
+   discoverability problems of a hamburger.
+3. The thin bar provides anchoring without stealing reading space.
 4. It is visually **distinct** from `quantecon-book-theme` (which has a
    prominent LHS sidebar + full toolbar) while retaining the best UX elements.
 5. Layout B (full RHS) can be explored as an **alternative layout option** in
    Phase 2, since the architecture supports swapping layout templates.
 
-> **Decision needed:** Confirm Layout C as the MVP direction, or choose an
-> alternative.
+#### Breadcrumb Navigation Specification
+
+```
+🏠  ›  Part III: Dynamic Programming  ›  Shortest Paths
+ ↑         ↑ dropdown: all parts            ↑ dropdown: lectures in Part III
+ │         │                                 │
+ Home      Click to see/switch parts         Click to see/switch lectures
+```
+
+- **Home icon:** Always links to `master_doc` (book index)
+- **Part dropdown:** Lists all top-level toctree entries (the book's parts).
+  Current part is highlighted. Clicking switches to that part's index.
+- **Lecture dropdown:** Lists all pages within the current part. Current page
+  is highlighted. Clicking navigates to that lecture.
+- **Mobile:** Breadcrumb truncates to `🏠 › … › Lecture Title` with the
+  middle segments accessible via a tap-to-expand menu.
+- **Single-page sites:** Breadcrumb simplifies to just the site title.
 
 ---
 
@@ -217,35 +249,51 @@ controls.
 The theme will use **CSS custom properties** throughout, making it fully
 re-themeable. The default palette should be neutral and professional.
 
+The palette is deliberately **distinct from `quantecon-book-theme`** (which
+uses blue primary, teal emphasis, and amber strong). This theme uses **indigo**
+as the primary, **emerald** for emphasis, and **rose** for strong — creating a
+fresh, scholarly feel that is immediately recognisable as a different theme.
+
 ```css
 /* Light mode defaults */
 :root {
-  --st-color-primary:     #2563eb;  /* Blue — links, active states */
+  --st-color-primary:     #6366f1;  /* Indigo — links, active states */
   --st-color-secondary:   #64748b;  /* Slate — muted text */
-  --st-color-accent:      #0891b2;  /* Cyan — emphasis, highlights */
+  --st-color-accent:      #8b5cf6;  /* Violet — highlights */
   --st-color-bg:          #ffffff;
   --st-color-surface:     #f8fafc;  /* Cards, code blocks */
   --st-color-border:      #e2e8f0;
   --st-color-text:        #1e293b;
   --st-color-text-muted:  #64748b;
-  --st-color-em:          #0d9488;  /* Teal — <em> tags */
-  --st-color-strong:      #d97706;  /* Amber — <strong> tags */
+  --st-color-em:          #059669;  /* Emerald — <em> tags */
+  --st-color-strong:      #e11d48;  /* Rose — <strong> tags */
   --st-color-code-bg:     #f1f5f9;
 }
 
 /* Dark mode */
 [data-theme="dark"] {
-  --st-color-primary:     #60a5fa;
-  --st-color-bg:          #0f172a;
-  --st-color-surface:     #1e293b;
-  --st-color-border:      #334155;
-  --st-color-text:        #e2e8f0;
-  --st-color-text-muted:  #94a3b8;
-  --st-color-em:          #2dd4bf;
-  --st-color-strong:      #fbbf24;
-  --st-color-code-bg:     #1e293b;
+  --st-color-primary:     #818cf8;  /* Lighter indigo */
+  --st-color-bg:          #18181b;  /* Zinc-950 */
+  --st-color-surface:     #27272a;  /* Zinc-800 */
+  --st-color-border:      #3f3f46;  /* Zinc-700 */
+  --st-color-text:        #e4e4e7;  /* Zinc-200 */
+  --st-color-text-muted:  #a1a1aa;  /* Zinc-400 */
+  --st-color-em:          #34d399;  /* Emerald-400 */
+  --st-color-strong:      #fb7185;  /* Rose-400 */
+  --st-color-code-bg:     #27272a;
 }
 ```
+
+**Comparison with quantecon-book-theme:**
+
+| Property | quantecon-book-theme | quantecon-sphinx-theme |
+|----------|---------------------|------------------------|
+| Primary | Blue (#2563eb) | Indigo (#6366f1) |
+| Emphasis (`<em>`) | Teal (#0d9488) | Emerald (#059669) |
+| Strong (`<strong>`) | Amber (#d97706) | Rose (#e11d48) |
+| Dark bg | Navy (#1a1a2e) | Zinc (#18181b) |
+| Dark text | Slate (#e2e8f0) | Zinc (#e4e4e7) |
+| Feel | Warm, golden | Cool, scholarly |
 
 **CSS variable prefix:** `--st-` (for "sphinx theme") — short, unlikely to
 collide, easy to type.
@@ -256,7 +304,7 @@ Following the quantecon-book-theme pattern, provide named colour schemes:
 
 | Scheme | `<em>` colour | `<strong>` colour | Description |
 |--------|--------------|-------------------|-------------|
-| `default` | Teal | Amber | Clean, warm, modern |
+| `default` | Emerald | Rose | Cool, scholarly, modern |
 | `academic` | Navy | Burgundy | Traditional academic feel |
 | `minimal` | Inherit | Bold only (no colour) | For users who want plain text |
 
@@ -518,29 +566,35 @@ all core features.
 
 ---
 
-## 7. Open Questions
+## 7. Resolved Decisions
 
-1. **Naming:** `quantecon-sphinx-theme` keeps the QuantEcon name in a
-   "general-purpose" package. Should we consider a fully neutral name
-   (e.g. `lecture-sphinx-theme`, `scholar-theme`, `clarity-theme`) to signal
-   that it's not QuantEcon-specific?
+1. **Naming:** Keep `quantecon-sphinx-theme` for now. May revisit with a
+   brand-neutral name later.
 
-2. **Layout direction:** Is Layout C (Hybrid) the right starting point, or
-   should we commit to Layout B (full RHS) for maximum differentiation?
+2. **Layout direction:** ✅ **Layout C (Hybrid) with breadcrumb navigation**.
+   The top bar shows `🏠 › Part X › Lecture Title` with clickable dropdowns
+   for switching between parts and lectures. RHS ToC for within-page nav.
 
-3. **pydata-sphinx-theme vs from scratch:** Inheriting from pydata gives us a
-   lot for free (Bootstrap grid, accessibility, search) but also constrains our
-   markup and CSS. Should we consider a from-scratch approach for full control?
+3. **pydata-sphinx-theme vs from scratch:** ✅ **Inherit from pydata for MVP.**
+   It gives us search templates, toctree rendering, and accessibility
+   foundations for free. Our template overrides are clean enough that we could
+   drop the dependency later if desired. All visual styling is through our own
+   `--st-*` custom properties, not Bootstrap classes.
 
-4. **Font loading:** Google Fonts CDN is convenient but raises privacy/GDPR
-   concerns. Should we bundle fonts in the package instead (or offer both)?
+4. **Font loading:** ✅ **Google Fonts CDN** with `font-display: swap`.
 
-5. **MathJax macros:** The quantecon-book-theme ships macros like `\RR`, `\EE`,
-   `\PP`. These are useful in economics but might confuse physicists (`\PP` for
-   momentum?). Should the macro set be configurable or minimal?
+5. **MathJax macros:** ✅ **Economics-focused by default, configurable.** Ship
+   common econ macros (`\RR`, `\EE`, `\PP`, `\NN`, `\ZZ`, `\QQ`, `\CC`,
+   `\argmax`, `\argmin`) with `mathjax_macros = True`. Users can disable or
+   extend via `mathjax_macros = False` and their own MathJax config.
 
-6. **Minimum Python version:** quantecon-book-theme requires Python ≥ 3.12.
-   Should this theme support 3.10+ for wider compatibility?
+6. **Minimum Python version:** ✅ **Python ≥ 3.12** — modern Python, aligned
+   with quantecon-book-theme.
+
+7. **Colour scheme:** ✅ **Indigo/Emerald/Rose palette** — deliberately distinct
+   from quantecon-book-theme's Blue/Teal/Amber. Cool, scholarly feel.
+
+8. **Branding:** ✅ **"Theme by QuantEcon"** in the footer as recognition.
 
 ---
 
@@ -581,7 +635,7 @@ feature-richness.
 ### Light Mode
 ```
 ╔═══════════════════════════════════════════════════════════╗
-║  ≡  Lecture Title                      ☀  🔍   GitHub   ║  ← 40px top bar
+║  🏠 › Part III ▾ › Markov Chains ▾      ☀  🔍  GitHub   ║  ← 40px breadcrumb bar
 ╠═══════════════════════════════════════════╦═══════════════╣
 ║                                           ║ On this page  ║
 ║  # Introduction to Markov Chains          ║               ║
@@ -598,14 +652,28 @@ feature-richness.
 ║  ```                                      ║               ║
 ║                                           ║               ║
 ╠═══════════════════════════════════════════╩═══════════════╣
-║  © 2026 · Built with quantecon-sphinx-theme              ║
+║  © 2026 · Theme by QuantEcon                             ║
 ╚═══════════════════════════════════════════════════════════╝
+```
+
+### Part Dropdown (when "Part III" is clicked)
+```
+╔═══════════════════════════════════════════════════════════╗
+║  🏠 › Part III ▾ › Markov Chains ▾      🌙  🔍  GitHub   ║
+╠═══════════╦═══════════════════════════════════════════════╣
+║           ║                                               ║
+║  Part I   ║                                               ║
+║  Part II  ║                                               ║
+║ •Part III ║   (main content continues underneath)         ║
+║  Part IV  ║                                               ║
+║           ║                                               ║
+╚═══════════╩═══════════════════════════════════════════════╝
 ```
 
 ### Dark Mode
 ```
 ╔═══════════════════════════════════════════════════════════╗
-║  ≡  Lecture Title                      🌙  🔍   GitHub   ║
+║  🏠 › Part III ▾ › Markov Chains ▾      🌙  🔍  GitHub   ║
 ╠═══════════════════════════════════════════╦═══════════════╣
 ║                                           ║ On this page  ║
 ║  # Introduction to Markov Chains          ║               ║
@@ -619,11 +687,11 @@ feature-richness.
 ║  │               [0.3, 0.7]])      │      ║               ║
 ║  └─────────────────────────────────┘      ║               ║
 ╠═══════════════════════════════════════════╩═══════════════╣
-║  © 2026                                                   ║
+║  © 2026 · Theme by QuantEcon                             ║
 ╚═══════════════════════════════════════════════════════════╝
 ```
 
-(Dark mode: navy/charcoal bg, muted text, blue links, teal emphasis, amber strong)
+(Dark mode: zinc-charcoal bg, muted text, indigo links, emerald emphasis, rose strong)
 
 ---
 

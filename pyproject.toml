@@ -6,7 +6,7 @@ build-backend = "sphinx_theme_builder"
 name = "quantecon-sphinx-theme"
 description = "A clean, modern, content-focused Sphinx theme with scientific markup support, dark mode, and collapsible table of contents."
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.12"
 license = {text = "MIT"}
 authors = [
     {name = "QuantEcon", email = "admin@quantecon.org"},
@@ -17,8 +17,6 @@ classifiers = [
     "Framework :: Sphinx :: Theme",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
     "Topic :: Documentation",

@@ -12,27 +12,27 @@
   --st-topbar-height: 3rem;
   --st-content-padding: 2rem;
 
-  // ── Colors (Light mode) ─────────────────────────────────────────────────
-  --st-color-primary: #2563eb;
-  --st-color-primary-light: #dbeafe;
-  --st-color-secondary: #64748b;
-  --st-color-accent: #0891b2;
+  // ── Colors (Light mode) — Indigo / Emerald / Rose ──────────────────────
+  --st-color-primary: #6366f1;
+  --st-color-primary-light: #e0e7ff;
+  --st-color-secondary: #71717a;
+  --st-color-accent: #8b5cf6;
   --st-color-bg: #ffffff;
-  --st-color-surface: #f8fafc;
-  --st-color-surface-raised: #f1f5f9;
-  --st-color-border: #e2e8f0;
-  --st-color-border-strong: #cbd5e1;
-  --st-color-text: #1e293b;
-  --st-color-text-muted: #64748b;
-  --st-color-text-faint: #94a3b8;
-  --st-color-link: #2563eb;
-  --st-color-link-hover: #1d4ed8;
-  --st-color-code-bg: #f1f5f9;
-  --st-color-code-text: #1e293b;
+  --st-color-surface: #fafafa;
+  --st-color-surface-raised: #f4f4f5;
+  --st-color-border: #e4e4e7;
+  --st-color-border-strong: #d4d4d8;
+  --st-color-text: #18181b;
+  --st-color-text-muted: #71717a;
+  --st-color-text-faint: #a1a1aa;
+  --st-color-link: #6366f1;
+  --st-color-link-hover: #4f46e5;
+  --st-color-code-bg: #f4f4f5;
+  --st-color-code-text: #18181b;
 
-  // ── Emphasis colours (Default scheme) ───────────────────────────────────
-  --st-color-em: #0d9488;
-  --st-color-strong: #d97706;
+  // ── Emphasis colours (Default scheme: Emerald / Rose) ───────────────────
+  --st-color-em: #059669;
+  --st-color-strong: #e11d48;
 
   // ── Typography ──────────────────────────────────────────────────────────
   --st-font-heading: 'Inter', system-ui, -apple-system, sans-serif;
@@ -71,10 +71,10 @@
 
 // ── Colour scheme variants ────────────────────────────────────────────────
 
-// Academic: navy emphasis, burgundy strong
+// Academic: slate emphasis, burgundy strong
 [data-color-scheme="academic"] {
-  --st-color-em: #1e3a5f;
-  --st-color-strong: #7c2d12;
+  --st-color-em: #334155;
+  --st-color-strong: #9f1239;
 }
 
 // Minimal: no colour emphasis
