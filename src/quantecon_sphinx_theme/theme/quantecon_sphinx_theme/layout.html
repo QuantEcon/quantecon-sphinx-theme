@@ -166,7 +166,7 @@
             </ul>
             {% endif %}
           </li>
-          {% elif not st_breadcrumb_part %}
+          {% elif not st_breadcrumb_part and not st_is_landing %}
           {# Fallback for pages with no toctree context: show the page title #}
           <li class="st-breadcrumb__item">
             <span class="st-breadcrumb__sep" aria-hidden="true">›</span>

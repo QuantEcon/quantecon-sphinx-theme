@@ -86,8 +86,10 @@ def _build_breadcrumb_context(
         "st_breadcrumb_sections": [],
     }
 
+    result["st_is_landing"] = pagename == master
+
     if pagename == master:
-        # On the landing page — still provide H2 sections
+        # On the landing page — only show H2 sections (no page title)
         result["st_breadcrumb_sections"] = _get_h2_sections(env, pagename)
         return result
 
