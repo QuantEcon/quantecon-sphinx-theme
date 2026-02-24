@@ -7,6 +7,7 @@ author = "QuantEcon"
 extensions = [
     "myst_parser",
     "sphinx_design",
+    "sphinx.ext.mathjax",
 ]
 
 # Theme
