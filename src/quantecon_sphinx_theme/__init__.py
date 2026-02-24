@@ -301,7 +301,6 @@ def _add_page_context(app, pagename, templatename, context, doctree):
     context["st_show_page_toc_title"] = theme_options.get(
         "show_page_toc_title", True
     )
-    context["st_mathjax_macros"] = theme_options.get("mathjax_macros", True)
     context["st_google_fonts"] = theme_options.get("google_fonts", True)
 
 
@@ -309,6 +308,29 @@ def setup(app):
     """Register the theme with Sphinx."""
     app.setup_extension("pydata_sphinx_theme")
     app.setup_extension("sphinx.ext.mathjax")
+
+    # MathJax v3 configuration — merged with Sphinx's own config so we
+    # don't clobber processHtmlClass and other critical options.
+    app.config.mathjax3_config = {
+        "tex": {
+            "macros": {
+                "RR": "{\\mathbb{R}}",
+                "NN": "{\\mathbb{N}}",
+                "ZZ": "{\\mathbb{Z}}",
+                "QQ": "{\\mathbb{Q}}",
+                "CC": "{\\mathbb{C}}",
+                "EE": "{\\mathbb{E}}",
+                "PP": "{\\mathbb{P}}",
+                "argmax": "\\operatorname{argmax}",
+                "argmin": "\\operatorname{argmin}",
+            },
+            "packages": {"[+]": ["boldsymbol"]},
+        },
+        "svg": {
+            "fontCache": "global",
+            "scale": 0.92,
+        },
+    }
 
     app.add_html_theme("quantecon_sphinx_theme", get_html_theme_path())
 

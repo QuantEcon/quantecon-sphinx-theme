@@ -17,36 +17,6 @@
 
 {# ── Extra Head ──────────────────────────────────────────────────────────── #}
 {% block extrahead %}
-  {# MathJax v3 configuration with common scientific macros #}
-  {% if st_mathjax_macros %}
-  <script>
-    window.MathJax = {
-      tex: {
-        macros: {
-          RR: "{\\mathbb{R}}",
-          NN: "{\\mathbb{N}}",
-          ZZ: "{\\mathbb{Z}}",
-          QQ: "{\\mathbb{Q}}",
-          CC: "{\\mathbb{C}}",
-          EE: "{\\mathbb{E}}",
-          PP: "{\\mathbb{P}}",
-          argmax: "\\operatorname{argmax}",
-          argmin: "\\operatorname{argmin}",
-        },
-        packages: {'[+]': ['boldsymbol']},
-      },
-      options: {
-        ignoreHtmlClass: "tex2jax_ignore",
-        processHtmlClass: "tex2jax_process",
-      },
-      svg: {
-        fontCache: "global",
-        scale: 0.92,
-      }
-    };
-  </script>
-  {% endif %}
-
   {# SEO meta tags #}
   {% if theme_description %}
   <meta name="description" content="{{ theme_description }}">
