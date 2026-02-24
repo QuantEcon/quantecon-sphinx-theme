@@ -269,7 +269,9 @@
       <div class="st-content__inner">
         {% block docs_main %}
           <article role="article">
-            {% block body %}{% endblock %}
+            {% block docs_body %}
+              {% block body %}{% endblock %}
+            {% endblock docs_body %}
           </article>
         {% endblock docs_main %}
       </div>
