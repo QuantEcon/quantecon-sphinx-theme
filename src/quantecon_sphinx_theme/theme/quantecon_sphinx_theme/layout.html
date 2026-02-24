@@ -118,7 +118,7 @@
             </a>
           </li>
 
-          {# Part level — dropdown to switch parts #}
+          {# Part level — dropdown to switch parts (only for nested toctrees) #}
           {% if st_breadcrumb_part %}
           <li class="st-breadcrumb__item st-breadcrumb__item--has-dropdown">
             <span class="st-breadcrumb__sep" aria-hidden="true">›</span>
@@ -142,7 +142,7 @@
           </li>
           {% endif %}
 
-          {# Lecture level — dropdown to switch lectures within current part #}
+          {# Page level — dropdown shows sibling pages #}
           {% if st_breadcrumb_page %}
           <li class="st-breadcrumb__item st-breadcrumb__item--has-dropdown">
             <span class="st-breadcrumb__sep" aria-hidden="true">›</span>
@@ -167,10 +167,34 @@
             {% endif %}
           </li>
           {% elif not st_breadcrumb_part %}
-          {# Fallback for flat sites: just show the page title #}
+          {# Fallback for pages with no toctree context: show the page title #}
           <li class="st-breadcrumb__item">
             <span class="st-breadcrumb__sep" aria-hidden="true">›</span>
             <span class="st-breadcrumb__current">{{ title }}</span>
+          </li>
+          {% endif %}
+
+          {# Section level — H2 sections within the current page #}
+          {% if st_breadcrumb_sections %}
+          <li class="st-breadcrumb__item st-breadcrumb__item--has-dropdown st-breadcrumb__item--sections">
+            <span class="st-breadcrumb__sep" aria-hidden="true">›</span>
+            <button class="st-breadcrumb__link st-breadcrumb__dropdown-toggle st-breadcrumb__section-toggle"
+                    aria-expanded="false" aria-haspopup="true">
+              <span class="st-breadcrumb__text st-breadcrumb__section-text">Sections</span>
+              <svg class="st-breadcrumb__chevron" width="12" height="12" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </button>
+            <ul class="st-breadcrumb__dropdown st-breadcrumb__dropdown--sections" role="menu">
+              {% for section in st_breadcrumb_sections %}
+              <li role="menuitem">
+                <a href="{{ section.anchor }}" class="st-breadcrumb__dropdown-link st-breadcrumb__section-link">
+                  {{ section.title }}
+                </a>
+              </li>
+              {% endfor %}
+            </ul>
           </li>
           {% endif %}
         </ol>

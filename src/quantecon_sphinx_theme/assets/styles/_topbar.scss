@@ -175,6 +175,21 @@
   }
 }
 
+// ── Section-level breadcrumb (H2 anchors) ────────────────────────────────
+
+.st-breadcrumb__section-text {
+  color: var(--st-color-text-faint);
+  font-weight: 400;
+}
+
+.st-breadcrumb__dropdown--sections {
+  max-height: 20rem;
+}
+
+.st-breadcrumb__section-link {
+  font-weight: 400;
+}
+
 // ── Spacer ────────────────────────────────────────────────────────────────
 
 .st-topbar__spacer {

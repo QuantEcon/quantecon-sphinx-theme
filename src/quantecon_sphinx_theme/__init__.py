@@ -66,11 +66,13 @@ def _build_breadcrumb_context(
     """Traverse the Sphinx toctree to produce breadcrumb data.
 
     Returns a dict with keys destined for the Jinja context:
-      st_breadcrumb_part   — {title, url} for the current part (or None)
-      st_breadcrumb_parts  — [{title, url, current}] all top-level parts
-      st_breadcrumb_page   — {title, url} for the current page (or None)
+      st_breadcrumb_part     — {title, url} for the current part (or None)
+      st_breadcrumb_parts    — [{title, url, current}] all top-level parts
+      st_breadcrumb_page     — {title, url} for the current page (or None)
       st_breadcrumb_siblings — [{title, url, current}] sibling pages within
-                               the current part
+                                the current part
+      st_breadcrumb_sections — [{title, anchor}] H2 sections within the
+                                current page (for the final dropdown)
     """
     env: BuildEnvironment = app.env
     builder = app.builder
@@ -81,75 +83,134 @@ def _build_breadcrumb_context(
         "st_breadcrumb_parts": [],
         "st_breadcrumb_page": None,
         "st_breadcrumb_siblings": [],
+        "st_breadcrumb_sections": [],
     }
 
     if pagename == master:
-        # On the landing page — no breadcrumb parts/pages needed
+        # On the landing page — still provide H2 sections
+        result["st_breadcrumb_sections"] = _get_h2_sections(env, pagename)
         return result
 
     # Get the full toctree structure from the master document.
     # Each top-level child of master_doc is a "part".
     toctree_info = _get_toctree_structure(env, master)
     if not toctree_info:
+        result["st_breadcrumb_sections"] = _get_h2_sections(env, pagename)
         return result
+
+    # Determine if this is a "flat" toctree (no parts have children).
+    # In a flat toctree, top-level entries are siblings, not parts.
+    is_flat = all(not children for _, _, children in toctree_info)
 
     parts: list[dict[str, Any]] = []
     current_part: dict[str, Any] | None = None
     current_siblings: list[dict[str, Any]] = []
     page_entry: dict[str, Any] | None = None
 
-    for part_title, part_docname, part_children in toctree_info:
-        part_url = builder.get_relative_uri(pagename, part_docname)
-        is_current_part = False
+    if is_flat:
+        # Flat toctree: show only one level — the page, with siblings
+        for entry_title, entry_docname, _ in toctree_info:
+            entry_url = builder.get_relative_uri(pagename, entry_docname)
+            is_current = entry_docname == pagename
+            sibling = {
+                "title": entry_title,
+                "url": entry_url,
+                "current": is_current,
+            }
+            current_siblings.append(sibling)
+            if is_current:
+                page_entry = sibling
 
-        # Check if pagename is this part's docname or one of its children
-        if part_docname == pagename:
-            is_current_part = True
-        else:
-            for _child_title, child_docname in part_children:
-                if child_docname == pagename:
-                    is_current_part = True
-                    break
+        # No "part" level for flat toctrees
+        result["st_breadcrumb_page"] = page_entry
+        result["st_breadcrumb_siblings"] = current_siblings
 
-        part_entry = {
-            "title": part_title,
-            "url": part_url,
-            "current": is_current_part,
-        }
-        parts.append(part_entry)
+    else:
+        # Nested toctree: two-level breadcrumb (part + page)
+        for part_title, part_docname, part_children in toctree_info:
+            part_url = builder.get_relative_uri(pagename, part_docname)
+            is_current_part = False
 
-        if is_current_part:
-            current_part = part_entry
-
-            # Build sibling list (pages under this part)
-            if part_children:
-                for child_title, child_docname in part_children:
-                    child_url = builder.get_relative_uri(
-                        pagename, child_docname
-                    )
-                    is_current_page = child_docname == pagename
-                    sibling = {
-                        "title": child_title,
-                        "url": child_url,
-                        "current": is_current_page,
-                    }
-                    current_siblings.append(sibling)
-                    if is_current_page:
-                        page_entry = sibling
+            if part_docname == pagename:
+                is_current_part = True
             else:
-                # The part *is* the current page (no children)
-                page_entry = {
-                    "title": part_title,
-                    "url": part_url,
-                    "current": True,
-                }
+                for _child_title, child_docname in part_children:
+                    if child_docname == pagename:
+                        is_current_part = True
+                        break
 
-    result["st_breadcrumb_parts"] = parts
-    result["st_breadcrumb_part"] = current_part
-    result["st_breadcrumb_siblings"] = current_siblings
-    result["st_breadcrumb_page"] = page_entry
+            part_entry = {
+                "title": part_title,
+                "url": part_url,
+                "current": is_current_part,
+            }
+            parts.append(part_entry)
+
+            if is_current_part:
+                current_part = part_entry
+
+                if part_children:
+                    for child_title, child_docname in part_children:
+                        child_url = builder.get_relative_uri(
+                            pagename, child_docname
+                        )
+                        is_current_page = child_docname == pagename
+                        sibling = {
+                            "title": child_title,
+                            "url": child_url,
+                            "current": is_current_page,
+                        }
+                        current_siblings.append(sibling)
+                        if is_current_page:
+                            page_entry = sibling
+                else:
+                    page_entry = {
+                        "title": part_title,
+                        "url": part_url,
+                        "current": True,
+                    }
+
+        result["st_breadcrumb_parts"] = parts
+        result["st_breadcrumb_part"] = current_part
+        result["st_breadcrumb_siblings"] = current_siblings
+        result["st_breadcrumb_page"] = page_entry
+
+    # Always provide H2 sections for the current page
+    result["st_breadcrumb_sections"] = _get_h2_sections(env, pagename)
 
     return result
+
+
+def _get_h2_sections(
+    env: BuildEnvironment, docname: str
+) -> list[dict[str, str]]:
+    """Extract H2-level section titles and their anchor IDs from *docname*.
+
+    Returns a list of {title, anchor} dicts.
+    """
+    sections: list[dict[str, str]] = []
+    try:
+        doctree = env.get_doctree(docname)
+    except Exception:
+        return sections
+
+    # The doctree has a top-level section (H1). Its direct section children
+    # are H2s.
+    top_section = doctree.next_node(nodes.section)
+    if top_section is None:
+        return sections
+
+    for child in top_section.children:
+        if isinstance(child, nodes.section):
+            section_id = child.get("ids", [""])[0]
+            title_node = child.next_node(nodes.title)
+            if title_node and section_id:
+                sections.append({
+                    "title": title_node.astext(),
+                    "anchor": f"#{section_id}",
+                })
+
+    return sections
 
 
 def _get_toctree_structure(
