@@ -308,6 +308,7 @@ def _add_page_context(app, pagename, templatename, context, doctree):
 def setup(app):
     """Register the theme with Sphinx."""
     app.setup_extension("pydata_sphinx_theme")
+    app.setup_extension("sphinx.ext.mathjax")
 
     app.add_html_theme("quantecon_sphinx_theme", get_html_theme_path())
 
