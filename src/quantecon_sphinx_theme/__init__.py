@@ -248,6 +248,9 @@ def setup(app):
 
     app.add_html_theme("quantecon_sphinx_theme", get_html_theme_path())
 
+    # Register our compiled JS bundle
+    app.add_js_file("scripts/quantecon-sphinx-theme.js")
+
     # Register context injection
     app.connect("html-page-context", _add_page_context)
 

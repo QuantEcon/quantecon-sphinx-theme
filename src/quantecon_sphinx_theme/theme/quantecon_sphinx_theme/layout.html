@@ -65,10 +65,9 @@
 
 {# ── Body Tag ────────────────────────────────────────────────────────────── #}
 {% block body_tag %}
-<body data-theme="light"
-      data-color-scheme="{{ st_color_scheme }}"
+<body data-color-scheme="{{ st_color_scheme }}"
       class="st-body">
-  {# Flash prevention: set theme before first paint #}
+  {# Flash prevention: set theme on <html> before first paint #}
   <script>
     (function() {
       var saved = localStorage.getItem('st-theme');
@@ -86,7 +85,7 @@
         theme = 'dark';
       }
 
-      document.body.setAttribute('data-theme', theme);
+      document.documentElement.setAttribute('data-theme', theme);
     })();
   </script>
 {% endblock body_tag %}

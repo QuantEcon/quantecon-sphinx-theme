@@ -15,7 +15,8 @@ function getSystemTheme() {
 
 function applyTheme(theme) {
   const resolved = theme === "auto" ? getSystemTheme() : theme;
-  document.body.setAttribute("data-theme", resolved);
+  // Set on <html> to override pydata-sphinx-theme's own data-theme attribute
+  document.documentElement.setAttribute("data-theme", resolved);
 }
 
 export function initThemeToggle() {
