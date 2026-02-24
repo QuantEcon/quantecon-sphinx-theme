@@ -1,0 +1,109 @@
+// ============================================================================
+// RHS Table of Contents — Scroll-spy, auto-expand, collapsible
+// ============================================================================
+
+.st-toc__inner {
+  padding-top: var(--st-space-md);
+}
+
+.st-toc__inner--sticky {
+  position: sticky;
+  top: calc(var(--st-topbar-height) + var(--st-space-lg));
+  max-height: calc(100vh - var(--st-topbar-height) - var(--st-space-2xl));
+  overflow-y: auto;
+
+  // Subtle scrollbar
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--st-color-border);
+    border-radius: 2px;
+  }
+}
+
+// ── Title ─────────────────────────────────────────────────────────────────
+
+.st-toc__title {
+  font-family: var(--st-font-heading);
+  font-size: var(--st-font-size-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--st-color-text-muted);
+  margin: 0 0 var(--st-space-sm) 0;
+  padding: 0;
+}
+
+// ── Navigation list ───────────────────────────────────────────────────────
+
+.st-toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.st-toc-list--nested {
+  padding-left: var(--st-space-md);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--st-transition-normal);
+}
+
+// Expanded state (set by scroll-spy JS)
+.st-toc-item--expanded > .st-toc-list--nested {
+  max-height: 500px;
+}
+
+// ── Links ─────────────────────────────────────────────────────────────────
+
+.st-toc-link {
+  display: block;
+  padding: var(--st-space-xs) 0;
+  font-family: var(--st-font-heading);
+  font-size: var(--st-font-size-xs);
+  color: var(--st-color-text-muted);
+  line-height: var(--st-line-height-tight);
+  border-left: 2px solid transparent;
+  padding-left: var(--st-space-sm);
+  transition: all var(--st-transition-fast);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--st-color-text);
+    text-decoration: none;
+  }
+
+  // Active state (set by scroll-spy JS)
+  &.active {
+    color: var(--st-color-primary);
+    border-left-color: var(--st-color-primary);
+    font-weight: 500;
+  }
+}
+
+// ── Back to top button ────────────────────────────────────────────────────
+
+.st-back-to-top {
+  display: flex;
+  align-items: center;
+  gap: var(--st-space-xs);
+  margin-top: var(--st-space-lg);
+  padding: var(--st-space-xs) 0;
+  border: none;
+  background: none;
+  color: var(--st-color-text-faint);
+  font-family: var(--st-font-heading);
+  font-size: var(--st-font-size-xs);
+  cursor: pointer;
+  opacity: 0;
+  transition: all var(--st-transition-fast);
+
+  &.visible {
+    opacity: 1;
+  }
+
+  &:hover {
+    color: var(--st-color-primary);
+  }
+}

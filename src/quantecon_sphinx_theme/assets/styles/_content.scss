@@ -1,0 +1,59 @@
+// ============================================================================
+// Content — Prose styling (headings, paragraphs, lists within articles)
+// ============================================================================
+
+.st-content__inner {
+  // ── Anchor links ──────────────────────────────────────────────────────
+  .headerlink {
+    opacity: 0;
+    font-size: var(--st-font-size-sm);
+    color: var(--st-color-text-faint);
+    margin-left: var(--st-space-xs);
+    transition: opacity var(--st-transition-fast);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--st-color-primary);
+    }
+  }
+
+  h1:hover .headerlink,
+  h2:hover .headerlink,
+  h3:hover .headerlink,
+  h4:hover .headerlink,
+  h5:hover .headerlink,
+  h6:hover .headerlink {
+    opacity: 1;
+  }
+
+  // ── Definition lists ────────────────────────────────────────────────
+  dl {
+    margin-bottom: var(--st-space-lg);
+  }
+
+  dt {
+    font-weight: 600;
+    color: var(--st-color-strong);
+    margin-bottom: var(--st-space-xs);
+  }
+
+  dd {
+    margin-left: var(--st-space-xl);
+    margin-bottom: var(--st-space-md);
+  }
+
+  // ── Inline code ─────────────────────────────────────────────────────
+  code:not(pre code) {
+    background-color: var(--st-color-code-bg);
+    color: var(--st-color-code-text);
+    padding: 0.1em 0.35em;
+    border-radius: var(--st-radius-sm);
+    font-family: var(--st-font-code);
+    font-size: 0.9em;
+  }
+
+  // ── Scroll margin for anchor navigation under sticky topbar ─────────
+  [id] {
+    scroll-margin-top: calc(var(--st-topbar-height) + var(--st-space-md));
+  }
+}

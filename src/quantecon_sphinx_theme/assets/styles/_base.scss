@@ -1,0 +1,125 @@
+// ============================================================================
+// Base — Typography, resets, and global element styling
+// ============================================================================
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: var(--st-font-size-base);
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--st-topbar-height) + 1rem);
+}
+
+body.st-body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--st-font-body);
+  font-size: var(--st-font-size-base);
+  line-height: var(--st-line-height);
+  color: var(--st-color-text);
+  background-color: var(--st-color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// ── Headings ──────────────────────────────────────────────────────────────
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--st-font-heading);
+  font-weight: 600;
+  line-height: var(--st-line-height-tight);
+  color: var(--st-color-text);
+  margin-top: var(--st-space-2xl);
+  margin-bottom: var(--st-space-md);
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 0;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: 1.5rem;
+  padding-bottom: var(--st-space-sm);
+  border-bottom: 1px solid var(--st-color-border);
+}
+
+h3 { font-size: 1.25rem; }
+h4 { font-size: 1.125rem; }
+h5 { font-size: 1rem; }
+h6 { font-size: var(--st-font-size-sm); }
+
+// ── Paragraphs & Prose ────────────────────────────────────────────────────
+
+p {
+  margin-top: 0;
+  margin-bottom: var(--st-space-md);
+}
+
+// ── Links ─────────────────────────────────────────────────────────────────
+
+a {
+  color: var(--st-color-link);
+  text-decoration: none;
+  transition: color var(--st-transition-fast);
+
+  &:hover {
+    color: var(--st-color-link-hover);
+    text-decoration: underline;
+  }
+}
+
+// ── Lists ─────────────────────────────────────────────────────────────────
+
+ul, ol {
+  margin-top: 0;
+  margin-bottom: var(--st-space-md);
+  padding-left: var(--st-space-xl);
+}
+
+li {
+  margin-bottom: var(--st-space-xs);
+}
+
+// ── Blockquotes ───────────────────────────────────────────────────────────
+
+blockquote {
+  margin: var(--st-space-lg) 0;
+  padding: var(--st-space-sm) var(--st-space-lg);
+  border-left: 3px solid var(--st-color-primary);
+  color: var(--st-color-text-muted);
+  background-color: var(--st-color-surface);
+  border-radius: 0 var(--st-radius-sm) var(--st-radius-sm) 0;
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// ── Horizontal rules ──────────────────────────────────────────────────────
+
+hr {
+  border: none;
+  border-top: 1px solid var(--st-color-border);
+  margin: var(--st-space-2xl) 0;
+}
+
+// ── Images ────────────────────────────────────────────────────────────────
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+// ── Selection ─────────────────────────────────────────────────────────────
+
+::selection {
+  background-color: var(--st-color-primary-light);
+  color: var(--st-color-text);
+}

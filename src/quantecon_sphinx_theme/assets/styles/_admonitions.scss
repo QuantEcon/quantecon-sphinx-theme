@@ -1,0 +1,78 @@
+// ============================================================================
+// Admonitions — Note, Warning, Tip, etc.
+// ============================================================================
+
+.admonition,
+div.admonition {
+  margin: var(--st-space-lg) 0;
+  padding: var(--st-space-md) var(--st-space-lg);
+  border-left: 4px solid var(--st-color-primary);
+  background-color: var(--st-color-surface);
+  border-radius: 0 var(--st-radius-md) var(--st-radius-md) 0;
+
+  .admonition-title {
+    font-family: var(--st-font-heading);
+    font-weight: 600;
+    font-size: var(--st-font-size-sm);
+    margin: 0 0 var(--st-space-sm) 0;
+    color: var(--st-color-primary);
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// ── Type variants ─────────────────────────────────────────────────────────
+
+.admonition.note,
+div.admonition.note {
+  border-left-color: #2563eb;
+  .admonition-title { color: #2563eb; }
+}
+
+.admonition.tip,
+div.admonition.tip,
+.admonition.hint,
+div.admonition.hint {
+  border-left-color: #059669;
+  background-color: #ecfdf5;
+  .admonition-title { color: #059669; }
+}
+
+.admonition.warning,
+div.admonition.warning,
+.admonition.caution,
+div.admonition.caution {
+  border-left-color: #d97706;
+  background-color: #fffbeb;
+  .admonition-title { color: #d97706; }
+}
+
+.admonition.danger,
+div.admonition.danger,
+.admonition.error,
+div.admonition.error {
+  border-left-color: #dc2626;
+  background-color: #fef2f2;
+  .admonition-title { color: #dc2626; }
+}
+
+.admonition.important,
+div.admonition.important {
+  border-left-color: #7c3aed;
+  background-color: #f5f3ff;
+  .admonition-title { color: #7c3aed; }
+}
+
+// ── Proof / Definition / Exercise (sphinx-proof compatibility) ────────────
+
+.admonition.prf-definition {
+  border-left-color: var(--st-color-accent);
+  .admonition-title { color: var(--st-color-accent); }
+}
+
+.admonition.prf-theorem {
+  border-left-color: #6f42c1;
+  .admonition-title { color: #6f42c1; }
+}

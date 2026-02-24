@@ -1,0 +1,22 @@
+// ============================================================================
+// Footnotes
+// ============================================================================
+
+.footnote-reference {
+  font-size: 0.75em;
+  vertical-align: super;
+  line-height: 0;
+}
+
+dl.footnote {
+  font-size: var(--st-font-size-sm);
+  color: var(--st-color-text-muted);
+  border-top: 1px solid var(--st-color-border);
+  padding-top: var(--st-space-md);
+  margin-top: var(--st-space-2xl);
+
+  dt {
+    color: var(--st-color-text-muted);
+    font-weight: 500;
+  }
+}

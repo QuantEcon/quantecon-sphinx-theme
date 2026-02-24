@@ -1,0 +1,43 @@
+// ============================================================================
+// Tables — Responsive wrappers
+// ============================================================================
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: var(--st-space-lg);
+  font-size: var(--st-font-size-sm);
+
+  th {
+    font-family: var(--st-font-heading);
+    font-weight: 600;
+    text-align: left;
+    padding: var(--st-space-sm) var(--st-space-md);
+    border-bottom: 2px solid var(--st-color-border-strong);
+    color: var(--st-color-text);
+    background-color: var(--st-color-surface);
+  }
+
+  td {
+    padding: var(--st-space-sm) var(--st-space-md);
+    border-bottom: 1px solid var(--st-color-border);
+    vertical-align: top;
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+}
+
+// Responsive wrapper (added by JS for wide tables)
+.st-table-wrapper {
+  overflow-x: auto;
+  margin-bottom: var(--st-space-lg);
+  border-radius: var(--st-radius-md);
+  border: 1px solid var(--st-color-border);
+
+  table {
+    margin-bottom: 0;
+    border-radius: 0;
+  }
+}

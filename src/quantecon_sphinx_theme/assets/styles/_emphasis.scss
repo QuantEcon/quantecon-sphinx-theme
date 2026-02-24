@@ -1,0 +1,18 @@
+// ============================================================================
+// Emphasis — Colour schemes for <em>, <strong>, <dt>
+// ============================================================================
+// The actual colour values are defined in _variables.scss as CSS custom
+// properties (--st-color-em, --st-color-strong), so they adapt to the
+// active colour scheme and dark mode automatically.
+
+em {
+  font-style: normal;
+  font-weight: 550;
+  color: var(--st-color-em);
+}
+
+strong,
+b {
+  font-weight: 600;
+  color: var(--st-color-strong);
+}

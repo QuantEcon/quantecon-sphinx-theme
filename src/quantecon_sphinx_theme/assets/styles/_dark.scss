@@ -1,0 +1,109 @@
+// ============================================================================
+// Dark Mode — Full dark theme via [data-theme="dark"]
+// ============================================================================
+
+[data-theme="dark"] {
+  // ── Core colours ──────────────────────────────────────────────────────
+  --st-color-primary: #60a5fa;
+  --st-color-primary-light: rgba(96, 165, 250, 0.15);
+  --st-color-secondary: #94a3b8;
+  --st-color-accent: #22d3ee;
+  --st-color-bg: #0f172a;
+  --st-color-surface: #1e293b;
+  --st-color-surface-raised: #334155;
+  --st-color-border: #334155;
+  --st-color-border-strong: #475569;
+  --st-color-text: #e2e8f0;
+  --st-color-text-muted: #94a3b8;
+  --st-color-text-faint: #64748b;
+  --st-color-link: #60a5fa;
+  --st-color-link-hover: #93bbfd;
+  --st-color-code-bg: #1e293b;
+  --st-color-code-text: #e2e8f0;
+  --st-color-em: #2dd4bf;
+  --st-color-strong: #fbbf24;
+
+  // ── Shadows ─────────────────────────────────────────────────────────
+  --st-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --st-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+  --st-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+
+  // ── Selection ───────────────────────────────────────────────────────
+  ::selection {
+    background-color: rgba(96, 165, 250, 0.3);
+    color: #e2e8f0;
+  }
+
+  // ── Top bar ─────────────────────────────────────────────────────────
+  .st-topbar {
+    background-color: rgba(15, 23, 42, 0.9);
+    border-bottom-color: var(--st-color-border);
+  }
+
+  // ── Images ──────────────────────────────────────────────────────────
+  img {
+    opacity: 0.88;
+    transition: opacity var(--st-transition-fast);
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  // ── Admonitions ─────────────────────────────────────────────────────
+  .admonition.tip,
+  div.admonition.tip,
+  .admonition.hint,
+  div.admonition.hint {
+    background-color: rgba(5, 150, 105, 0.1);
+  }
+
+  .admonition.warning,
+  div.admonition.warning,
+  .admonition.caution,
+  div.admonition.caution {
+    background-color: rgba(217, 119, 6, 0.1);
+  }
+
+  .admonition.danger,
+  div.admonition.danger,
+  .admonition.error,
+  div.admonition.error {
+    background-color: rgba(220, 38, 38, 0.1);
+  }
+
+  .admonition.important,
+  div.admonition.important {
+    background-color: rgba(124, 58, 237, 0.1);
+  }
+
+  // ── Code syntax (dark variant) ──────────────────────────────────────
+  :where(body:not(.use-pygments-style)) {
+    .c, .c1, .cm, .cs, .cp { color: #8b949e; }
+    .s, .s1, .s2, .sb, .sc, .sd, .se, .sh, .si, .sx, .sr, .ss { color: #7ee787; }
+    .k, .kc, .kd, .kn, .kp, .kr, .kt { color: #ff7b72; }
+    .nf, .fm, .nc { color: #d2a8ff; }
+    .nb, .bp { color: #79c0ff; }
+    .m, .mi, .mf, .mh, .mo, .mb, .il { color: #79c0ff; }
+    .o, .ow { color: #ff7b72; }
+    .nd { color: #d2a8ff; }
+    .n { color: var(--st-color-code-text); }
+    .na { color: #79c0ff; }
+    .p { color: var(--st-color-code-text); }
+    .gd { color: #ffa198; background-color: rgba(248, 81, 73, 0.15); }
+    .gi { color: #7ee787; background-color: rgba(63, 185, 80, 0.15); }
+    .gh { color: #79c0ff; font-weight: 600; }
+    .gu { color: #d2a8ff; font-weight: 600; }
+  }
+
+  // ── ANSI dark mode ──────────────────────────────────────────────────
+  .ansi-black-fg   { color: #c5c1b4; }
+  .ansi-white-fg   { color: #3e424d; }
+}
+
+// ── Dark mode colour scheme variants ──────────────────────────────────────
+
+[data-theme="dark"][data-color-scheme="academic"] {
+  --st-color-em: #93c5fd;
+  --st-color-strong: #fca5a5;
+}

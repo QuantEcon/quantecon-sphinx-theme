@@ -1,0 +1,70 @@
+// ============================================================================
+// Search — Overlay search bar
+// ============================================================================
+
+.st-search-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 300;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 15vh;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--st-transition-normal);
+
+  &.st-search-overlay--open {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.st-search-overlay__inner {
+  width: 100%;
+  max-width: 36rem;
+  padding: 0 var(--st-space-md);
+}
+
+.st-search-form {
+  display: flex;
+  background-color: var(--st-color-bg);
+  border-radius: var(--st-radius-lg);
+  box-shadow: var(--st-shadow-lg);
+  overflow: hidden;
+  border: 2px solid var(--st-color-primary);
+}
+
+.st-search-form__input {
+  flex: 1;
+  padding: var(--st-space-md) var(--st-space-lg);
+  border: none;
+  background: none;
+  font-family: var(--st-font-body);
+  font-size: var(--st-font-size-lg);
+  color: var(--st-color-text);
+  outline: none;
+
+  &::placeholder {
+    color: var(--st-color-text-faint);
+  }
+}
+
+.st-search-form__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  border: none;
+  background: none;
+  color: var(--st-color-text-muted);
+  cursor: pointer;
+
+  &:hover {
+    color: var(--st-color-text);
+  }
+}

@@ -1,0 +1,23 @@
+// ============================================================================
+// Figures — Image and caption styling
+// ============================================================================
+
+figure,
+.figure {
+  margin: var(--st-space-lg) 0;
+  text-align: center;
+
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--st-radius-md);
+  }
+}
+
+figcaption,
+.caption {
+  font-size: var(--st-font-size-sm);
+  color: var(--st-color-text-muted);
+  margin-top: var(--st-space-sm);
+  font-style: italic;
+}

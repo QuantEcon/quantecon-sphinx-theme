@@ -1,0 +1,84 @@
+// ============================================================================
+// Layout — Page grid (Layout C: Hybrid)
+// ============================================================================
+// Minimal top bar + full-width content + RHS ToC panel
+
+$breakpoint-lg: 1200px;
+$breakpoint-md: 900px;
+$breakpoint-sm: 600px;
+
+.st-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.st-main {
+  display: flex;
+  flex: 1;
+  margin-top: var(--st-topbar-height);
+  max-width: 100%;
+}
+
+// ── Main content ──────────────────────────────────────────────────────────
+
+.st-content {
+  flex: 1;
+  min-width: 0; // allow shrinking
+  display: flex;
+  justify-content: center;
+  padding: var(--st-space-2xl) var(--st-content-padding);
+}
+
+.st-content__inner {
+  width: 100%;
+  max-width: var(--st-content-max-width);
+}
+
+// ── RHS ToC ───────────────────────────────────────────────────────────────
+
+.st-toc {
+  width: var(--st-toc-width);
+  flex-shrink: 0;
+  padding: var(--st-space-2xl) var(--st-space-lg) var(--st-space-2xl) 0;
+  display: none; // hidden by default, shown at breakpoint
+
+  @media (min-width: $breakpoint-lg) {
+    display: block;
+  }
+}
+
+// ── Footer ────────────────────────────────────────────────────────────────
+
+.st-footer {
+  border-top: 1px solid var(--st-color-border);
+  padding: var(--st-space-lg) var(--st-content-padding);
+  color: var(--st-color-text-muted);
+  font-size: var(--st-font-size-sm);
+
+  a {
+    color: var(--st-color-text-muted);
+    &:hover {
+      color: var(--st-color-link);
+    }
+  }
+}
+
+.st-footer__inner {
+  max-width: calc(var(--st-content-max-width) + var(--st-toc-width) + var(--st-content-padding));
+  margin: 0 auto;
+}
+
+// ── Responsive adjustments ────────────────────────────────────────────────
+
+@media (max-width: $breakpoint-md) {
+  .st-content {
+    padding: var(--st-space-lg) var(--st-space-md);
+  }
+}
+
+@media (max-width: $breakpoint-sm) {
+  .st-content {
+    padding: var(--st-space-md) var(--st-space-sm);
+  }
+}

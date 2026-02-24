@@ -1,0 +1,20 @@
+// quantecon-sphinx-theme — Main SCSS entry point
+// Import order matters: variables first, then base, then components.
+
+@forward "variables";
+@forward "base";
+@forward "layout";
+@forward "topbar";
+@forward "sidebar-nav";
+@forward "toc";
+@forward "content";
+@forward "math";
+@forward "code";
+@forward "admonitions";
+@forward "emphasis";
+@forward "tables";
+@forward "figures";
+@forward "footnotes";
+@forward "search";
+@forward "dark";
+@forward "utilities";

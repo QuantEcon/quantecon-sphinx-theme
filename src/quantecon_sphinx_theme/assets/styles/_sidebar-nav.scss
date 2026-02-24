@@ -1,0 +1,140 @@
+// ============================================================================
+// Sidebar Navigation — Hamburger slide-out overlay
+// ============================================================================
+
+.st-sidebar-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 200;
+  pointer-events: none;
+  visibility: hidden;
+
+  &.st-sidebar-nav--open {
+    pointer-events: auto;
+    visibility: visible;
+
+    .st-sidebar-nav__backdrop {
+      opacity: 1;
+    }
+
+    .st-sidebar-nav__panel {
+      transform: translateX(0);
+    }
+  }
+}
+
+// ── Backdrop ──────────────────────────────────────────────────────────────
+
+.st-sidebar-nav__backdrop {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transition: opacity var(--st-transition-normal);
+}
+
+// ── Panel ─────────────────────────────────────────────────────────────────
+
+.st-sidebar-nav__panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: var(--st-sidebar-width);
+  max-width: 85vw;
+  background-color: var(--st-color-bg);
+  border-right: 1px solid var(--st-color-border);
+  transform: translateX(-100%);
+  transition: transform var(--st-transition-normal);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: var(--st-shadow-lg);
+}
+
+// ── Header ────────────────────────────────────────────────────────────────
+
+.st-sidebar-nav__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--st-space-md) var(--st-space-lg);
+  border-bottom: 1px solid var(--st-color-border);
+  flex-shrink: 0;
+}
+
+.st-sidebar-nav__title {
+  font-family: var(--st-font-heading);
+  font-weight: 600;
+  font-size: var(--st-font-size-sm);
+  color: var(--st-color-text);
+}
+
+.st-sidebar-nav__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--st-color-text-muted);
+  cursor: pointer;
+  border-radius: var(--st-radius-sm);
+  transition: all var(--st-transition-fast);
+
+  &:hover {
+    background-color: var(--st-color-surface);
+    color: var(--st-color-text);
+  }
+}
+
+// ── Content (toctree navigation) ──────────────────────────────────────────
+
+.st-sidebar-nav__content {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--st-space-md) var(--st-space-lg);
+
+  // Style the Sphinx-generated toctree
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    margin-bottom: 0;
+  }
+
+  a {
+    display: block;
+    padding: var(--st-space-xs) var(--st-space-sm);
+    color: var(--st-color-text-muted);
+    font-family: var(--st-font-heading);
+    font-size: var(--st-font-size-sm);
+    border-radius: var(--st-radius-sm);
+    transition: all var(--st-transition-fast);
+
+    &:hover {
+      color: var(--st-color-text);
+      background-color: var(--st-color-surface);
+      text-decoration: none;
+    }
+
+    &.current {
+      color: var(--st-color-primary);
+      font-weight: 500;
+      background-color: var(--st-color-primary-light);
+    }
+  }
+
+  // Nested levels
+  ul ul {
+    padding-left: var(--st-space-md);
+  }
+}

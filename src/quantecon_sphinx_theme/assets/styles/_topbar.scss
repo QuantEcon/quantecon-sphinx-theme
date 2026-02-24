@@ -1,0 +1,129 @@
+// ============================================================================
+// Top Bar — Minimal sticky header
+// ============================================================================
+
+.st-topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: var(--st-topbar-height);
+  background-color: var(--st-color-bg);
+  border-bottom: 1px solid var(--st-color-border);
+  backdrop-filter: blur(8px);
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.st-topbar__inner {
+  max-width: 90rem;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--st-space-md);
+  gap: var(--st-space-sm);
+}
+
+// ── Hamburger button ──────────────────────────────────────────────────────
+
+.st-topbar__menu-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--st-color-text);
+  cursor: pointer;
+  border-radius: var(--st-radius-sm);
+  transition: background-color var(--st-transition-fast);
+
+  &:hover {
+    background-color: var(--st-color-surface);
+  }
+}
+
+// ── Title / Logo ──────────────────────────────────────────────────────────
+
+.st-topbar__title {
+  display: flex;
+  align-items: center;
+  gap: var(--st-space-sm);
+  text-decoration: none;
+  color: var(--st-color-text);
+  font-family: var(--st-font-heading);
+  font-weight: 600;
+  font-size: var(--st-font-size-sm);
+
+  &:hover {
+    color: var(--st-color-primary);
+    text-decoration: none;
+  }
+}
+
+.st-topbar__logo {
+  height: 1.5rem;
+  width: auto;
+}
+
+.st-topbar__site-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// ── Spacer ────────────────────────────────────────────────────────────────
+
+.st-topbar__spacer {
+  flex: 1;
+}
+
+// ── Control buttons ───────────────────────────────────────────────────────
+
+.st-topbar__controls {
+  display: flex;
+  align-items: center;
+  gap: var(--st-space-xs);
+}
+
+.st-topbar__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--st-color-text-muted);
+  cursor: pointer;
+  border-radius: var(--st-radius-sm);
+  transition: all var(--st-transition-fast);
+  text-decoration: none;
+
+  &:hover {
+    background-color: var(--st-color-surface);
+    color: var(--st-color-text);
+    text-decoration: none;
+  }
+}
+
+// ── Theme toggle icon visibility ──────────────────────────────────────────
+
+.st-theme-toggle {
+  .st-icon-moon {
+    display: none;
+  }
+}
+
+[data-theme="dark"] .st-theme-toggle {
+  .st-icon-sun {
+    display: none;
+  }
+  .st-icon-moon {
+    display: block;
+  }
+}

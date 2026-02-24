@@ -1,0 +1,33 @@
+// ============================================================================
+// Math — MathJax v3 styling
+// ============================================================================
+
+.math,
+.MathJax,
+.MathJax_Display,
+mjx-container {
+  color: var(--st-color-text);
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+// Display math: centered with vertical margin
+mjx-container[jax="SVG"][display="true"],
+.math.notranslate {
+  display: block;
+  margin: var(--st-space-lg) auto;
+  text-align: center;
+}
+
+// Scroll margin for linked equations
+mjx-container[id],
+.math[id] {
+  scroll-margin-top: calc(var(--st-topbar-height) + var(--st-space-md));
+}
+
+// Equation numbers
+.eqno {
+  float: right;
+  color: var(--st-color-text-muted);
+  font-size: var(--st-font-size-sm);
+}

@@ -1,0 +1,84 @@
+// ============================================================================
+// CSS Custom Properties — the theming API
+// ============================================================================
+// All visual properties are defined here as CSS custom properties.
+// Users can override any of these in their own CSS to re-theme entirely.
+
+:root {
+  // ── Layout ──────────────────────────────────────────────────────────────
+  --st-content-max-width: 48rem;
+  --st-sidebar-width: 18rem;
+  --st-toc-width: 14rem;
+  --st-topbar-height: 3rem;
+  --st-content-padding: 2rem;
+
+  // ── Colors (Light mode) ─────────────────────────────────────────────────
+  --st-color-primary: #2563eb;
+  --st-color-primary-light: #dbeafe;
+  --st-color-secondary: #64748b;
+  --st-color-accent: #0891b2;
+  --st-color-bg: #ffffff;
+  --st-color-surface: #f8fafc;
+  --st-color-surface-raised: #f1f5f9;
+  --st-color-border: #e2e8f0;
+  --st-color-border-strong: #cbd5e1;
+  --st-color-text: #1e293b;
+  --st-color-text-muted: #64748b;
+  --st-color-text-faint: #94a3b8;
+  --st-color-link: #2563eb;
+  --st-color-link-hover: #1d4ed8;
+  --st-color-code-bg: #f1f5f9;
+  --st-color-code-text: #1e293b;
+
+  // ── Emphasis colours (Default scheme) ───────────────────────────────────
+  --st-color-em: #0d9488;
+  --st-color-strong: #d97706;
+
+  // ── Typography ──────────────────────────────────────────────────────────
+  --st-font-heading: 'Inter', system-ui, -apple-system, sans-serif;
+  --st-font-body: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --st-font-code: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  --st-font-size-base: 1rem;
+  --st-font-size-sm: 0.875rem;
+  --st-font-size-lg: 1.125rem;
+  --st-font-size-xs: 0.75rem;
+  --st-line-height: 1.7;
+  --st-line-height-tight: 1.3;
+
+  // ── Spacing ─────────────────────────────────────────────────────────────
+  --st-space-xs: 0.25rem;
+  --st-space-sm: 0.5rem;
+  --st-space-md: 1rem;
+  --st-space-lg: 1.5rem;
+  --st-space-xl: 2rem;
+  --st-space-2xl: 3rem;
+
+  // ── Borders ─────────────────────────────────────────────────────────────
+  --st-radius-sm: 0.25rem;
+  --st-radius-md: 0.5rem;
+  --st-radius-lg: 0.75rem;
+
+  // ── Transitions ─────────────────────────────────────────────────────────
+  --st-transition-fast: 150ms ease;
+  --st-transition-normal: 250ms ease;
+  --st-transition-slow: 400ms ease;
+
+  // ── Shadows ─────────────────────────────────────────────────────────────
+  --st-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --st-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --st-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+// ── Colour scheme variants ────────────────────────────────────────────────
+
+// Academic: navy emphasis, burgundy strong
+[data-color-scheme="academic"] {
+  --st-color-em: #1e3a5f;
+  --st-color-strong: #7c2d12;
+}
+
+// Minimal: no colour emphasis
+[data-color-scheme="minimal"] {
+  --st-color-em: inherit;
+  --st-color-strong: inherit;
+}

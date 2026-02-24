@@ -1,0 +1,105 @@
+// ============================================================================
+// Code — Syntax highlighting and code block structure
+// ============================================================================
+
+// ── Code blocks ───────────────────────────────────────────────────────────
+
+pre {
+  background-color: var(--st-color-code-bg);
+  border: 1px solid var(--st-color-border);
+  border-radius: var(--st-radius-md);
+  padding: var(--st-space-md);
+  overflow-x: auto;
+  font-family: var(--st-font-code);
+  font-size: var(--st-font-size-sm);
+  line-height: 1.6;
+  margin: var(--st-space-md) 0 var(--st-space-lg);
+
+  code {
+    background: none;
+    padding: 0;
+    border-radius: 0;
+    font-size: inherit;
+    color: inherit;
+  }
+}
+
+// ── Jupyter cell structure ────────────────────────────────────────────────
+
+.cell {
+  margin-bottom: var(--st-space-lg);
+}
+
+.cell_input {
+  margin-bottom: var(--st-space-sm);
+}
+
+.cell_output {
+  pre {
+    background-color: transparent;
+    border-color: var(--st-color-border);
+    border-style: dashed;
+  }
+}
+
+// ── Syntax highlighting (built-in theme) ──────────────────────────────────
+// Uses :where() for zero specificity — Pygments styles can override cleanly.
+
+:where(body:not(.use-pygments-style)) {
+  // Comments
+  .c, .c1, .cm, .cs, .cp { color: #6a737d; font-style: italic; }
+  // Strings
+  .s, .s1, .s2, .sb, .sc, .sd, .se, .sh, .si, .sx, .sr, .ss { color: #22863a; }
+  // Keywords
+  .k, .kc, .kd, .kn, .kp, .kr, .kt { color: #d73a49; font-weight: 500; }
+  // Names / Functions
+  .nf, .fm, .nc { color: #6f42c1; }
+  // Builtins
+  .nb, .bp { color: #005cc5; }
+  // Numbers
+  .m, .mi, .mf, .mh, .mo, .mb, .il { color: #005cc5; }
+  // Operators
+  .o, .ow { color: #d73a49; }
+  // Decorators
+  .nd { color: #6f42c1; }
+  // Variables / Attributes
+  .n { color: var(--st-color-code-text); }
+  .na { color: #005cc5; }
+  .nx { color: var(--st-color-code-text); }
+  // Punctuation
+  .p { color: var(--st-color-code-text); }
+  // Error
+  .err { color: #cb2431; }
+  // Generic (diff output, etc.)
+  .gd { color: #cb2431; background-color: #ffeef0; }
+  .gi { color: #22863a; background-color: #f0fff4; }
+  .gh { color: #005cc5; font-weight: 600; }
+  .gu { color: #6f42c1; font-weight: 600; }
+}
+
+// ── ANSI terminal colours ─────────────────────────────────────────────────
+
+.ansi-black-fg   { color: #3e424d; }
+.ansi-red-fg     { color: #e75c58; }
+.ansi-green-fg   { color: #00a250; }
+.ansi-yellow-fg  { color: #ddb62b; }
+.ansi-blue-fg    { color: #208ffb; }
+.ansi-magenta-fg { color: #d160c4; }
+.ansi-cyan-fg    { color: #60c6c8; }
+.ansi-white-fg   { color: #c5c1b4; }
+
+// ── Copy button (if sphinx-copybutton extension is active) ────────────────
+
+.copybtn {
+  top: var(--st-space-xs);
+  right: var(--st-space-xs);
+  background-color: var(--st-color-surface);
+  border: 1px solid var(--st-color-border);
+  border-radius: var(--st-radius-sm);
+  opacity: 0;
+  transition: opacity var(--st-transition-fast);
+}
+
+pre:hover .copybtn {
+  opacity: 1;
+}
