@@ -6,12 +6,17 @@ This page demonstrates every element the theme styles, useful for visual testing
 
 ### Headings
 
+Heading styles are shown by the structure of this page. For reference, the raw
+Markdown syntax:
+
+```markdown
 # Heading 1
 ## Heading 2
 ### Heading 3
 #### Heading 4
 ##### Heading 5
 ###### Heading 6
+```
 
 ### Prose
 

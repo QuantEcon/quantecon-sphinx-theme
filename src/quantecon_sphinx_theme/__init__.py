@@ -196,21 +196,22 @@ def _get_h2_sections(
     except Exception:
         return sections
 
-    # The doctree has a top-level section (H1). Its direct section children
-    # are H2s.
-    top_section = doctree.next_node(nodes.section)
-    if top_section is None:
-        return sections
-
-    for child in top_section.children:
-        if isinstance(child, nodes.section):
-            section_id = child.get("ids", [""])[0]
-            title_node = child.next_node(nodes.title)
-            if title_node and section_id:
-                sections.append({
-                    "title": title_node.astext(),
-                    "anchor": f"#{section_id}",
-                })
+    # The doctree normally has a single top-level section (H1) whose direct
+    # section children are H2s.  However, pages with multiple H1-level
+    # headings will have several top-level sections; collect H2-equivalents
+    # from each of them.
+    for top_node in doctree.children:
+        if not isinstance(top_node, nodes.section):
+            continue
+        for child in top_node.children:
+            if isinstance(child, nodes.section):
+                section_id = child.get("ids", [""])[0]
+                title_node = child.next_node(nodes.title)
+                if title_node and section_id:
+                    sections.append({
+                        "title": title_node.astext(),
+                        "anchor": f"#{section_id}",
+                    })
 
     return sections
 
