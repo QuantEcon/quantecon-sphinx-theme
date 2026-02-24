@@ -63,6 +63,13 @@ export function initToc() {
   const tocNav = document.querySelector(".st-toc__nav");
   if (!tocNav) return;
 
+  // Enable auto-expand/collapse only after JS has loaded.
+  // Without this class, nested ToC items remain visible (no-JS fallback).
+  const tocInner = tocNav.closest(".st-toc__inner");
+  if (tocInner) {
+    tocInner.classList.add("st-toc--autoexpand");
+  }
+
   const onScroll = throttle(() => {
     const active = getActiveSection();
     highlightTocLink(active ? active.id : null);

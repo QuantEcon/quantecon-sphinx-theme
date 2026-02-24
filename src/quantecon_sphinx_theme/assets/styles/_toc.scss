@@ -45,9 +45,15 @@
 
 .st-toc-list--nested {
   padding-left: var(--st-space-md);
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height var(--st-transition-normal);
+
+  // By default, nested lists are visible.
+  // When JS enables auto-expand, it adds .st-toc--autoexpand on the
+  // container and manages expansion via .st-toc-item--expanded.
+  .st-toc--autoexpand & {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--st-transition-normal);
+  }
 }
 
 // Expanded state (set by scroll-spy JS)

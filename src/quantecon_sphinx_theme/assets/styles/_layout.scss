@@ -41,9 +41,9 @@ $breakpoint-sm: 600px;
   width: var(--st-toc-width);
   flex-shrink: 0;
   padding: var(--st-space-2xl) var(--st-space-lg) var(--st-space-2xl) 0;
-  display: none; // hidden by default, shown at breakpoint
+  display: none; // hidden on narrow screens, shown at breakpoint
 
-  @media (min-width: $breakpoint-lg) {
+  @media (min-width: $breakpoint-md) {
     display: block;
   }
 }
