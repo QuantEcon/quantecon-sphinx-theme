@@ -14,13 +14,14 @@
   backdrop-filter: blur(8px);
 }
 
+// The topbar mirrors the page grid so controls align with the RHS ToC.
+// Content area:  flex-1 (matches .st-content)
+// Controls area: var(--st-toc-width) (matches .st-toc)
 .st-topbar__inner {
-  max-width: 90rem;
-  margin: 0 auto;
   height: 100%;
   display: flex;
   align-items: center;
-  padding: 0 var(--st-space-md);
+  padding: 0 var(--st-content-padding);
   gap: var(--st-space-sm);
 }
 
@@ -197,11 +198,19 @@
 }
 
 // ── Control buttons ───────────────────────────────────────────────────────
+// At wide viewports the controls container matches the ToC width so buttons
+// sit centred above the "On this page" panel.
 
 .st-topbar__controls {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: var(--st-space-xs);
+
+  @media (min-width: 900px) {
+    width: var(--st-toc-width);
+    flex-shrink: 0;
+  }
 }
 
 .st-topbar__btn {
