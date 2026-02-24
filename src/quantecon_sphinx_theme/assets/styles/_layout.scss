@@ -58,15 +58,47 @@ $breakpoint-sm: 600px;
 
   a {
     color: var(--st-color-text-muted);
+    text-decoration: none;
     &:hover {
       color: var(--st-color-link);
     }
+  }
+
+  p {
+    margin: 0;
+    line-height: 1.6;
   }
 }
 
 .st-footer__inner {
   max-width: calc(var(--st-content-max-width) + var(--st-toc-width) + var(--st-content-padding));
   margin: 0 auto;
+}
+
+.st-footer__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--st-space-lg);
+  flex-wrap: wrap;
+}
+
+.st-footer__start {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.st-footer__end {
+  text-align: right;
+}
+
+.st-footer__branding a {
+  font-weight: 500;
+}
+
+.st-footer__extra {
+  margin-top: var(--st-space-xs);
 }
 
 // ── Responsive adjustments ────────────────────────────────────────────────

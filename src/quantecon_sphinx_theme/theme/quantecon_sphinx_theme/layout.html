@@ -300,14 +300,27 @@
   {# ── Footer ────────────────────────────────────────────────────── #}
   <footer class="st-footer" role="contentinfo">
     <div class="st-footer__inner">
-      <div class="st-footer__content">
-        {% if theme_extra_footer %}
-          {{ theme_extra_footer }}
-        {% endif %}
-        <p class="st-footer__branding">Theme by <a href="https://quantecon.org">QuantEcon</a></p>
+      <div class="st-footer__row">
+        <div class="st-footer__start">
+          {% if show_copyright and copyright %}
+          <p class="st-footer__copyright">&copy; {{ copyright }}.</p>
+          {% endif %}
+          {% if show_sphinx %}
+          <p class="st-footer__sphinx">Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> {{ sphinx_version }}.</p>
+          {% endif %}
+          {% if theme_extra_footer %}
+          <div class="st-footer__extra">{{ theme_extra_footer }}</div>
+          {% endif %}
+        </div>
+        <div class="st-footer__end">
+          <p class="st-footer__branding">Theme by <a href="https://quantecon.org">QuantEcon</a></p>
+        </div>
       </div>
     </div>
   </footer>
 
 </div>
 {% endblock content %}
+
+{# Suppress the pydata-sphinx-theme footer — all info is in our footer above #}
+{% block footer %}{% endblock footer %}
