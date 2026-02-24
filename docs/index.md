@@ -7,6 +7,7 @@ A clean, modern, content-focused Sphinx theme for scientific documentation.
 
 getting-started
 configuration
+gallery
 kitchen-sink
 ```
 

@@ -31,6 +31,19 @@ dependencies = [
 
 dynamic = ["version"]
 
+[project.optional-dependencies]
+doc = [
+    "myst-parser>=2.0",
+    "sphinx-design>=0.5",
+]
+dev = [
+    "myst-parser>=2.0",
+    "sphinx-design>=0.5",
+    "sphinx-theme-builder[cli]>=0.2.0a7",
+    "nox",
+    "pre-commit",
+]
+
 [project.urls]
 Homepage = "https://github.com/QuantEcon/quantecon-sphinx-theme"
 Repository = "https://github.com/QuantEcon/quantecon-sphinx-theme"
