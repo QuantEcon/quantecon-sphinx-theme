@@ -32,7 +32,7 @@ There is no PyPI release yet, so install from the repository — and pin a commi
 `main` is not a stable target:
 
 ```bash
-pip install "quantecon-sphinx-theme @ git+https://github.com/QuantEcon/quantecon-sphinx-theme@<commit-sha>"
+pip install "quantecon-sphinx-theme @ git+https://github.com/QuantEcon/quantecon-sphinx-theme@6a22984"
 ```
 
 In your `conf.py` (or Jupyter Book `_config.yml`):
