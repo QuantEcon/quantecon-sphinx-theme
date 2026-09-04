@@ -22,8 +22,10 @@ kitchen-sink
 
 ## Quick Start
 
+There is no PyPI release yet, so install from the repository and pin a commit:
+
 ```bash
-pip install quantecon-sphinx-theme
+pip install "quantecon-sphinx-theme @ git+https://github.com/QuantEcon/quantecon-sphinx-theme@6a22984"
 ```
 
 Then set `html_theme = "quantecon_sphinx_theme"` in your Sphinx `conf.py`.

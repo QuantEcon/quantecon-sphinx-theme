@@ -4,6 +4,18 @@ A clean, modern, content-focused Sphinx theme for scientific documentation.
 
 Built for [Jupyter Book](https://jupyterbook.org/) ≥ 1.0 and [Sphinx](https://www.sphinx-doc.org/) 7–8.
 
+> [!WARNING]
+> **In development — not ready for use.** This theme has no tagged release and is not
+> published on PyPI, so there is nothing stable to depend on yet. Whether the project
+> continues at all is an open question — see
+> [#6](https://github.com/QuantEcon/quantecon-sphinx-theme/issues/6).
+>
+> If you are choosing a theme today, use
+> [quantecon-book-theme](https://github.com/QuantEcon/quantecon-book-theme) for a
+> Jupyter Book 1 site, or
+> [quantecon-theme.mystmd](https://github.com/QuantEcon/quantecon-theme.mystmd) if you
+> are building on Jupyter Book 2 / `mystmd`.
+
 ## Features
 
 - **Collapsible RHS Table of Contents** — scroll-spy, auto-expand, copy-link buttons
@@ -16,8 +28,11 @@ Built for [Jupyter Book](https://jupyterbook.org/) ≥ 1.0 and [Sphinx](https://
 
 ## Quick Start
 
+There is no PyPI release yet, so install from the repository — and pin a commit, since
+`main` is not a stable target:
+
 ```bash
-pip install quantecon-sphinx-theme
+pip install "quantecon-sphinx-theme @ git+https://github.com/QuantEcon/quantecon-sphinx-theme@6a22984"
 ```
 
 In your `conf.py` (or Jupyter Book `_config.yml`):
